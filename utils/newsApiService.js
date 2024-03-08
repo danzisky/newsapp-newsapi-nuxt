@@ -13,7 +13,7 @@ export class NewsAPIService {
     try {
       const response = await fetch(url);
       const data = await response.json();
-      return data.articles;
+      return data;
     } catch (error) {
       console.error('Error fetching top headlines:', error);
       return [];
@@ -33,7 +33,7 @@ export class NewsAPIService {
     try {
       const response = await fetch(url);
       const data = await response.json();
-      return data.articles;
+      return data;
     } catch (error) {
       console.error('Error searching news:', error);
       return [];
@@ -49,41 +49,10 @@ export class NewsAPIService {
     try {
       const response = await fetch(url);
       const data = await response.json();
-      return data.sources;
+      return data;
     } catch (error) {
       console.error('Error fetching sources:', error);
       return [];
     }
   }
 }
-
-/* // Example usage:
-const apiKey = '80f3266e5aa04d96a18e2568769ed44d'; // Replace with your NewsAPI API key
-const newsService = new NewsAPIService(apiKey); */
-
-// Get top headlines
-/* newsService.getTopHeadlines('us', 'technology', 10, 1)
-  .then(articles => {
-    console.log('Top technology headlines:', articles);
-  })
-  .catch(error => {
-    console.error('Error getting top headlines:', error);
-  });
-
-// Search news
-newsService.searchNews('tesla', 'en', '2024-01-01', '2024-02-01', 10, 1)
-  .then(articles => {
-    console.log('Bitcoin news:', articles);
-  })
-  .catch(error => {
-    console.error('Error searching news:', error);
-  });
-
-// Get sources
-newsService.getSources('business', 'en')
-  .then(sources => {
-    console.log('Business news sources:', sources);
-  })
-  .catch(error => {
-    console.error('Error getting sources:', error);
-  }); */

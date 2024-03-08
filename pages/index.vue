@@ -1,68 +1,32 @@
 <template>
-  <div>Main Content {{ runtimeConfig.newsapiApiKey }}</div>
+  <div class="p-8 max-w-7xl">
+    <div class="grid grid-cols-3 gap-6 w-full justify-items-stretch">
+      <NewsCard v-for="(headline, index) in newsStore.headlines.items" :key="index" :news-data="headline" :loading="!newsStore.headlines.totalItems" class="w-full h-full"></NewsCard>
+    </div>
+    <template>
+    <div class="text-center py-16">
+      <v-pagination
+        color="green"
+        v-model="newsStore.headlines.page"
+        :length="newsStore.headlines.pages"
+        next-icon="mdi-menu-right"
+        prev-icon="mdi-menu-left"
+      ></v-pagination>
+    </div>
+</template>
+  </div>
 </template>
 <script setup>
 import NewsAPI from "newsapi"
 import { NewsAPIService } from "../utils/newsApiService"
+
 const runtimeConfig = useRuntimeConfig().public
-
-const newsapi = new NewsAPIService(runtimeConfig.newsapiApiKey);
-
-const articles = ref([]);
-
-const topHeadlines = ref([]);
-const sources = ref([]);
-let searchQuery = ref("tesla");
-
-const fetchTopHeadlines = async () => {
-  const response = await newsapi.getTopHeadlines("en", "business");
-  // return response.articles;
-  console.log(response);
-};
-
-
-const fetchSources = async () => {
-  const response = await newsapi.getSources("bitcoin");
-  // return response.sources;
-  console.log(response);
-};
-
-const fetchArticles = async () => {
-    const response = await newsapi.searchNews(searchQuery.value, "en");
-  // return response.articles;
-  console.log(response);
-};
-
-// const fetchTopHeadlines = async () => {
-//   const response = await newsapi.v2.topHeadlines({
-//     country: "us",
-//     category: "business",
-//   });
-//   // return response.articles;
-//   console.log(response);
-// };
-
-
-// const fetchSources = async () => {
-//   const response = await newsapi.v2.sources({
-//     language: "en",
-//   });
-//   // return response.sources;
-//   console.log(response);
-// };
-
-// const fetchArticles = async () => {
-//   const response = await newsapi.v2.everything({
-//     q: searchQuery.value,
-//     language: "en",
-//   });
-//   // return response.articles;
-//   console.log(response);
-// };
+const newsStore = useNewsStore()
 
 onMounted(()=> {
-  fetchTopHeadlines();
-  fetchSources();
-  fetchArticles();
+  newsStore.fetchTopHeadlines({
+    country: "us",
+    pageSize: 9,
+  })
 });
 </script>
