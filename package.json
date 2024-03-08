@@ -11,13 +11,17 @@
   },
   "dependencies": {
     "@formkit/auto-animate": "^0.8.1",
+    "@mdi/font": "^7.4.47",
     "@pinia/nuxt": "^0.5.1",
     "@vueuse/nuxt": "^10.9.0",
+    "newsapi": "^2.4.1",
     "nuxt": "^3.10.3",
     "vue": "^3.4.19",
     "vue-router": "^4.3.0"
   },
   "devDependencies": {
-    "@nuxtjs/tailwindcss": "^6.11.4"
+    "@nuxtjs/tailwindcss": "^6.11.4",
+    "vite-plugin-vuetify": "^2.0.2",
+    "vuetify": "^3.5.8"
   }
 }
