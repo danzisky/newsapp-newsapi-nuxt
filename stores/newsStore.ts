@@ -75,6 +75,7 @@ export const useNewsStore = defineStore('news', {
       page: 1,
       pages: 0,
     } as SourceData,
+    domain: null,
     lastFilter: {}
   }),
 
@@ -140,7 +141,8 @@ export const useNewsStore = defineStore('news', {
       }
       else if(type === 'headlines') {
         filterStructure = {
-          country: country,
+          // country: country,
+          country: language,
           category: category
         }
       }

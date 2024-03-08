@@ -20,32 +20,42 @@
       <v-divider></v-divider>
 
       <v-list density="compact" nav>
-        <v-list-item prepend-icon="mdi-home-city" title="Home" value="home"></v-list-item>
         <v-list-item
+          prepend-icon="mdi-home-city"
+          title="Home"
+          value="home"
+          @click="navTo('/')"
+        ></v-list-item>
+       <v-list-item
+          prepend-icon="mdi-newspaper"
+          title="All Stories"
+          value="all-stories"
+          @click="navTo('/')"
+        ></v-list-item>
+        <v-list-item
+          prepend-icon="mdi-newspaper-check"
+          title="Top Headlines"
+          value="top-headlines"
+          @click="navTo('/top-headlines')"
+        ></v-list-item>
+         <v-list-item
           prepend-icon="mdi-account"
           title="My Account"
           value="account"
-        ></v-list-item>
-        <v-list-item
-          prepend-icon="mdi-account-group-outline"
-          title="Users"
-          value="users"
+          @click="navTo('/account')"
         ></v-list-item>
       </v-list>
     </v-navigation-drawer>
-
-    <!-- <v-navigation-drawer location="right">
-      <v-list>
-        <v-list-item title="Drawer right"></v-list-item>
-      </v-list>
-    </v-navigation-drawer> -->
-
     <v-main class="h-full overflow-auto" style="min-height: 300px">
       <slot />
     </v-main>
   </v-layout>
 </template>
 <script setup>
-const rail = ref(true)
-const drawer = ref(true)
+const rail = ref(true);
+const drawer = ref(true);
+
+const navTo = async (url) => {
+  await navigateTo(url);
+};
 </script>

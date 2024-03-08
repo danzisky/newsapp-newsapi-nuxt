@@ -126,7 +126,11 @@
   const appyFilters = () => {
     try {
       newsStore.lastFilter = filter
-      newsStore.searchNews(newsStore.filterData('news', filter))
+      if(newsStore.domain == "headlines") {
+        newsStore.fetchTopHeadlines(newsStore.filterData('headlines', filter))
+      } else {
+        newsStore.searchNews(newsStore.filterData('news', filter))
+      }
     } catch (error) {
       console.log(error);
       alert('Something went wrong! Please try again.')
