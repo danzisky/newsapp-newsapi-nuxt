@@ -20,9 +20,12 @@ export class NewsAPIService {
     }
   }
 
-  async searchNews(query, language = 'en', fromDate = null, toDate = null, pageSize = 20, page = 1) {
+  async searchNews(query = null, language = 'en', fromDate = null, toDate = null, sortBy = null, pageSize = 20, page = 1) {
     let url = `${this.apiUrl}/everything?q=${query}&language=${language}&apiKey=${this.apiKey}&pageSize=${pageSize}&page=${page}`;
 
+    if (sortBy) {
+      url += `&sortBy=${sortBy}`;
+    }
     if (fromDate) {
       url += `&from=${fromDate}`;
     }
