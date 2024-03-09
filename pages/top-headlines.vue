@@ -1,11 +1,17 @@
 <template>
-  <div class="p-8 w-5/6_ flex justify-center items-start gap-4 relative">
+  <div class="p-4 md:p-8 w-5/6_ flex justify-center items-start gap-4 relative">
     <div class="w-full">
-      <div v-if="!newsStore.loading.headlines && !newsStore.headlines.items" class="w-max_">
-        <v-alert variant="tonal" text="There are no items to be displayed. Please make sure you haven't exceeded api limits" type="info"></v-alert>
-
+      <div
+        v-if="!newsStore.loading.headlines && !newsStore.headlines.items"
+        class="w-max_"
+      >
+        <v-alert
+          variant="tonal"
+          text="There are no items to be displayed. Please make sure you haven't exceeded api limits"
+          type="info"
+        ></v-alert>
       </div>
-      <div v-else class="grid grid-cols-3 gap-6 w-full justify-items-stretch">
+      <div v-else class="grid gris-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full justify-items-stretch">
         <NewsCard
           v-for="(headline, index) in newsStore.headlines.items"
           :key="index"
@@ -17,6 +23,18 @@
       <div>
         <div class="text-center pt-16">
           <v-pagination
+            class="md:hidden"
+            v-if="newsStore.loading.headlines || newsStore.headlines.items"
+            color="green"
+            v-model="newsStore.headlines.page"
+            :length="newsStore.headlines.pages"
+            next-icon="mdi-menu-right"
+            prev-icon="mdi-menu-left"
+            total-visible="0"
+            @update:model-value="changePage"
+          ></v-pagination>
+          <v-pagination
+            class="hidden md:block"
             v-if="newsStore.loading.headlines || newsStore.headlines.items"
             color="green"
             v-model="newsStore.headlines.page"
@@ -29,8 +47,8 @@
         </div>
       </div>
     </div>
-    <div class="basis-1/3 relative h-full">
-      <NewsFilter class="w-full sticky" />
+    <div class="lg:basis-1/3 relative h-full">
+      <ResponsiveFilter class="w-full sticky" />
     </div>
   </div>
 </template>
@@ -47,12 +65,10 @@ const changePage = (page) => {
     pageSize: 9,
     page: page,
   };
-  newsStore.fetchTopHeadlines(
-    filters
-  );
+  newsStore.fetchTopHeadlines(filters);
 };
 onMounted(() => {
-  newsStore.domain = "headlines"
+  newsStore.domain = "headlines";
   newsStore.fetchTopHeadlines({
     language: "en",
     pageSize: 9,
