@@ -1,9 +1,9 @@
 <template>
-  <v-card color="green" variant="tonal" class="w-full">
+  <v-card color="green-darken-2" variant="tonal" class="w-full">
     <v-card-item>
       <div>
         <div class="text-overline mb-1">
-          {{ variant }}
+          {{ 'News App' }}
         </div>
         <div class="text-h6 mb-1">Filter</div>
         <div class="text-caption">Filter cases by title and date</div>

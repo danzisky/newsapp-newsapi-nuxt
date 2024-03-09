@@ -1,7 +1,7 @@
 <template>
   <div class="p-8 w-5/6_ flex justify-center items-start gap-4 relative">
     <div class="w-full">
-      <div v-if="!newsStore.loading.news && !newsStore.headlines.items" class="w-max_">
+      <div v-if="!newsStore.loading.headlines && !newsStore.headlines.items" class="w-max_">
         <v-alert variant="tonal" text="There are no items to be displayed. Please make sure you haven't exceeded api limits" type="info"></v-alert>
 
       </div>
@@ -10,14 +10,14 @@
           v-for="(headline, index) in newsStore.headlines.items"
           :key="index"
           :news-data="headline"
-          :loading="!newsStore.loading.news"
+          :loading="newsStore.loading.headlines"
           class="w-full h-full"
         ></NewsCard>
       </div>
-      <template>
+      <div>
         <div class="text-center pt-16">
           <v-pagination
-            v-if="newsStore.loading.news || newsStore.headlines.items"
+            v-if="newsStore.loading.headlines || newsStore.headlines.items"
             color="green"
             v-model="newsStore.headlines.page"
             :length="newsStore.headlines.pages"
@@ -27,7 +27,7 @@
             @update:model-value="changePage"
           ></v-pagination>
         </div>
-      </template>
+      </div>
     </div>
     <div class="basis-1/3 relative h-full">
       <NewsFilter class="w-full sticky" />

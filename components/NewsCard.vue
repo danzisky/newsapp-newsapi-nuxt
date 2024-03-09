@@ -3,15 +3,15 @@
     <v-skeleton-loader :loading="loading" min-height="20rem" class="w-full h-full" type="image, article">
       <v-card
         elevation="0"
-        color="green-lighten-5"
-        :variant="variant"
+        color="green-lighten-4"
+        variant="flat"
         class="w-full h-full"
       >
         <v-img :src="newsData.urlToImage" lazy-src="https://picsum.photos/id/870/200/300?grayscale&blur=2" height="16rem" cover></v-img>
         <v-card-item class="max-h-30_" _style="max-height: 2rem">
           <div>
             <div class="text-overline mb-1">
-              {{ variant }}
+              {{ newsData?.author }}
             </div>
             <div class="text-h6 mb-1">
               {{ newsData.title }}

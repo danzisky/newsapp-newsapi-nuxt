@@ -10,11 +10,11 @@
           v-for="(headline, index) in newsStore.news.items"
           :key="index"
           :news-data="headline"
-          :loading="!newsStore.loading.news"
+          :loading="newsStore.loading.news"
           class="w-full h-full"
         ></NewsCard>
       </div>
-      <template>
+      <div>
         <div class="text-center pt-16">
           <v-pagination
             v-if="newsStore.loading.news || newsStore.news.items"
@@ -27,7 +27,7 @@
             @update:model-value="changePage"
           ></v-pagination>
         </div>
-      </template>
+      </div>
     </div>
     <div class="basis-1/3 relative h-full">
       <NewsFilter class="w-full sticky" />
